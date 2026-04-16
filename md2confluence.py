@@ -59,6 +59,9 @@ def md_to_html(md_path: str) -> str:
     # 전처리: bold 텍스트 직후 리스트가 오는 경우 빈 줄 삽입
     md = re.sub(r"(\*\*[^*]+:\*\*)\n(- )", r"\1\n\n\2", md)
 
+    # 백슬래시+공백 → pandoc이 non-breaking space로 해석하므로 이스케이프
+    md = re.sub(r"\\(?= )", r"\\\\", md)
+
     # mermaid → 일반 코드 블록 (Confluence 미지원)
     md = re.sub(r"```mermaid", "```", md)
 
