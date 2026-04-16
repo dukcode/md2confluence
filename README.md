@@ -2,6 +2,11 @@
 
 Markdown 파일을 Confluence 페이지로 변환·업로드하는 스크립트.
 
+## 왜?
+
+Confluence의 Markdown 매크로 블록은 테이블, 코드 블록 언어 감지, 중첩 구조 등에서 렌더링이 불완전하다.
+이 스크립트는 Markdown을 Confluence 네이티브 storage format으로 변환하므로 이런 제약이 없다.
+
 ## 의존성
 
 ### 외부
