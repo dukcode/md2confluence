@@ -55,11 +55,11 @@ python3 md2atlassian.py <md_파일> --dry-run --format jira
 ```bash
 # Confluence 페이지 업로드
 python3 md2atlassian.py ./analysis.md \
-  "https://wiki.example.com/spaces/SPACE/pages/123456789/페이지+제목"
+  "https://wiki.atlassian.com/spaces/SPACE/pages/123456789/페이지+제목"
 
 # Jira 이슈 description 업데이트
 python3 md2atlassian.py ./ticket.md \
-  "https://jira.example.com/browse/PROJECT-1234"
+  "https://jira.atlassian.com/browse/PROJECT-1234"
 
 # dry-run
 python3 md2atlassian.py ./analysis.md --dry-run --format confluence

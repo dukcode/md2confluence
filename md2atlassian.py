@@ -11,8 +11,8 @@ URL 패턴으로 대상을 자동 분기한다:
     python3 md2atlassian.py <md_file> --dry-run --format {confluence,jira}
 
 예시:
-    python3 md2atlassian.py ./doc.md "https://wiki.example.com/spaces/SPACE/pages/123456789/페이지+제목"
-    python3 md2atlassian.py ./doc.md "https://jira.example.com/browse/PROJECT-1234"
+    python3 md2atlassian.py ./doc.md "https://wiki.atlassian.com/spaces/SPACE/pages/123456789/페이지+제목"
+    python3 md2atlassian.py ./doc.md "https://jira.atlassian.com/browse/PROJECT-1234"
     python3 md2atlassian.py ./doc.md --dry-run --format confluence
 
 환경변수:
