@@ -42,8 +42,8 @@ export MD2CONFLUENCE_TOKEN='발급받은_토큰'
 # 기본 사용
 python3 md2confluence.py <md_파일> <confluence_페이지_url>
 
-# 변환 결과만 확인 (업로드 안 함)
-python3 md2confluence.py <md_파일> <confluence_페이지_url> --dry-run
+# 변환 결과만 확인 (업로드 안 함, URL 생략 가능)
+python3 md2confluence.py <md_파일> --dry-run
 ```
 
 ### 예시
@@ -53,9 +53,7 @@ python3 md2confluence.py <md_파일> <confluence_페이지_url> --dry-run
 python3 md2confluence.py ./analysis.md \
   "https://your-domain.atlassian.net/wiki/spaces/SPACE/pages/123456789/페이지+제목"
 
-# dry-run
-python3 md2confluence.py ./analysis.md \
-  "https://your-domain.atlassian.net/wiki/spaces/SPACE/pages/123456789" \
-  --dry-run
+# dry-run (URL 없이 변환 결과만 확인)
+python3 md2confluence.py ./analysis.md --dry-run
 ```
 

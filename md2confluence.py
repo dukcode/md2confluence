@@ -4,11 +4,11 @@ Markdown -> Confluence 페이지 업로드 스크립트
 
 사용법:
     python3 md2confluence.py <md_file> <confluence_page_url>
-    python3 md2confluence.py <md_file> <confluence_page_url> --dry-run
+    python3 md2confluence.py <md_file> --dry-run
 
 예시:
     python3 md2confluence.py ./doc.md "https://wiki.atlassian.com/spaces/SPACE/pages/123456789/페이지+제목"
-    python3 md2confluence.py ./doc.md "https://wiki.atlassian.com/spaces/SPACE/pages/123456789" --dry-run
+    python3 md2confluence.py ./doc.md --dry-run
 
 환경변수:
     MD2CONFLUENCE_TOKEN  - Confluence Personal Access Token (필수)
@@ -155,9 +155,12 @@ def upload(base_url: str, page_id: str, token: str, body_html: str, title: str, 
 def main():
     parser = argparse.ArgumentParser(description="Markdown -> Confluence 업로드")
     parser.add_argument("md_file", help="변환할 Markdown 파일 경로")
-    parser.add_argument("confluence_url", help="Confluence 페이지 URL")
+    parser.add_argument("confluence_url", nargs="?", help="Confluence 페이지 URL (--dry-run 시 생략 가능)")
     parser.add_argument("--dry-run", action="store_true", help="변환만 하고 업로드하지 않음 (결과를 stdout에 출력)")
     args = parser.parse_args()
+
+    if not args.dry_run and not args.confluence_url:
+        parser.error("confluence_url은 필수입니다 (--dry-run 시에만 생략 가능)")
 
     if not os.path.isfile(args.md_file):
         print(f"ERROR: 파일을 찾을 수 없습니다: {args.md_file}", file=sys.stderr)
@@ -174,8 +177,6 @@ def main():
         print("       export MD2CONFLUENCE_TOKEN='your-token-here'", file=sys.stderr)
         sys.exit(1)
 
-    base_url, page_id = parse_confluence_url(args.confluence_url)
-
     # 변환
     print(f"변환 중: {args.md_file}")
     body_html = md_to_html(args.md_file)
@@ -185,6 +186,8 @@ def main():
         print("--- dry-run: 변환 결과 ---")
         print(body_html)
         return
+
+    base_url, page_id = parse_confluence_url(args.confluence_url)
 
     # 페이지 정보 조회
     print(f"페이지 조회 중: {page_id}")
